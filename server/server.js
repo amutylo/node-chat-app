@@ -22,7 +22,7 @@ socket.emit('newMessage', generateMessage('Admin', "Welcome to the chat app"));
 //socket.broadcast.emit from Admin text New user joined
 socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined.'))
 
-  socket.on('createMessage', function(message){
+  socket.on('createMessage', function(message, callback){
     console.log('Server: create message received', message);
     io.emit('newMessage', generateMessage(message.from, message.text))
     // socket.broadcast.emit('newMessage', {
@@ -30,6 +30,7 @@ socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined.')
     //   text: message.text,
     //   createdAt: new Date().getTime()
     // })
+      callback('This is from the server.')
   })
 
   socket.on('disconnect', function(){
